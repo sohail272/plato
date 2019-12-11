@@ -1,0 +1,45 @@
+<div class="project_boards container">
+  <div class="individual">
+    <h3>Individual Projects</h3>
+    <hr>
+    <%@projects.each do |project|%>
+      <ul>
+        <li><b>Project: </b> <%=project.name%></li>
+          <ul>
+            <%project.boards.each do |board|%>
+            <li> <%= link_to board.name, users_board_path(board) %>
+              <%board.cards.each do |card|%>
+              <ul>
+                <li><%=card.title%></li>
+              </ul>
+              <%end%>
+            </li>
+            <%end%>
+          </ul>
+      </ul>
+    <%end%>
+  </div>
+
+  <div class="organization">
+    <%if @org_projects%>
+      <h3>Organization's Projects</h3>
+      <hr>
+      <%@org_projects.each do |project|%>
+      <ul>
+        <li><b>Project: </b><%=project.name%>: Added by <b><%=project.creator.name%></b></li>
+          <ul>
+            <%project.boards.each do |board|%>
+            <li><%= link_to board.name, users_board_path(board)%>
+              <%board.cards.each do |card|%>
+              <ul>
+                <li><%=card.title%></li>
+              </ul>
+              <%end%>
+            </li>
+            <%end%>
+          </ul>
+      </ul>
+      <%end%>
+    <%end%>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="boards container">  
+  <h3><%= @board.name%></h3>
+
+  <%@board.cards.each do |card|%>
+    <ul>
+      <%totle_taks = card.tasks.count%>
+      <%completed_tasks = card.completed_tasks.count%>
+      <li><%=card.title%><% if card.tasks.any? %> <%=completed_tasks%>/<%=totle_taks%> <%end%></li>
+      <p><%=card.description%></p>
+        <ul>
+          <%card.tasks.each do |task|%>
+            <% task_status =  get_task_status(task)%>
+            <ul>
+              <li><%=task.description%> <%=task_status.html_safe %></li>
+            </ul>
+          <%end%>
+        </ul>
+    </ul>
+  <%end%>
+</div>
